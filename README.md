@@ -1,2 +1,2 @@
-# archcraft-dwm
+# archcraft-2bwm
  // Configuration : 2BWM
