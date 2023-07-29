@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2020-2023 Aditya Shakya <adi1090x@gmail.com>
+
+# 2bwm directory
+DIR="/usr/share/archcraft/2bwm"
+
+# Launch the bar
+launch_bar() {
+	# Terminate already running bar instances
+	killall -q polybar
+
+	# Wait until the processes have been shut down
+	while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
+
+	# Launch the bar
+	for mon in $(polybar --list-monitors | cut -d":" -f1); do
+		MONITOR=$mon polybar -q main -c "$DIR"/theme/polybar/config.ini &
+	done
+}
+
+launch_bar

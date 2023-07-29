@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2020-2023 Aditya Shakya <adi1090x@gmail.com>
+##
+## Autostart Programs
+
+# 2bwm dir
+bwmdir="/usr/share/archcraft/2bwm"
+
+# Kill already running process
+_ps=(xsettingsd ksuperkey)
+for _prs in "${_ps[@]}"; do
+	if [[ `pidof ${_prs}` ]]; then
+		killall -9 ${_prs}
+	fi
+done
+
+# Lauch xsettingsd daemon
+xsettingsd --config="$bwmdir"/xsettingsd &
+
+# polkit agent
+if [[ ! `pidof xfce-polkit` ]]; then
+	/usr/lib/xfce-polkit/xfce-polkit &
+fi
+
+# Enable power management
+xfce4-power-manager &
+
+# Enable Super Keys For Menu
+ksuperkey -e 'Super_L=Alt_L|F1' &
+ksuperkey -e 'Super_R=Alt_L|F1' &
+
+# Fix cursor
+xsetroot -cursor_name left_ptr
+
+# Restore wallpaper
+hsetroot -root -cover "$bwmdir"/theme/wallpaper
+
+# Launch notification daemon
+"$bwmdir"/scripts/2bwm_dunst
+
+# Launch simple status bar
+"$bwmdir"/scripts/2bwm_bar
+
+# Launch compositor
+"$bwmdir"/scripts/2bwm_comp
+
+# Start mpd
+exec mpd &
+
+# Fix problems with Java apps
+wmname "LG3D"
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+## Add your autostart programs here --------------
+
+## -----------------------------------------------
+
+# Launch 2bwm
+#while 2bwm; [ $? -ne 0  ]; do echo "start 2bwm"; done
+sleep 2 && 2bwm

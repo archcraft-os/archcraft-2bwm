@@ -1,0 +1,6 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=2bwm
+Comment=2bwm - A fast floating and keyboard driven window manager
+Exec=/usr/share/archcraft/2bwm/scripts/2bwm_autostart
+Type=XSession

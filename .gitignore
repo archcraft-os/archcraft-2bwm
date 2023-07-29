@@ -1,0 +1,5 @@
+archcraft-2bwm/src
+archcraft-2bwm/pkg
+archcraft-2bwm/*.pkg.tar.zst
+cleanup.sh
+push.sh

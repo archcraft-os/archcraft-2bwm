@@ -1,0 +1,59 @@
+# Maintainer: Aditya Shakya <adi1090x@gmail.com>
+
+pkgname=archcraft-2bwm
+pkgver=1.0
+pkgrel=0
+pkgdesc="2BWM for Archcraft"
+url="https://github.com/archcraft-os/archcraft-2bwm"
+arch=('any')
+license=('GPL3')
+options=(zipman)
+depends=('xcb-util-wm' 'xcb-util-keysyms' 'xcb-util-xrm' 
+		'hsetroot' 'alacritty' 'thunar' 'geany'
+		'rofi' 'polybar' 'dunst'
+		'mpd' 'mpc'
+		'maim' 'xclip' 'viewnior' 'feh'
+		'ksuperkey' 
+		'betterlockscreen'
+		'xfce4-power-manager' 
+		'xsettingsd'
+		'xorg-xsetroot'
+		'wmname'
+		'pulsemixer' 'light' 'xcolor'
+)
+conflicts=('2bwm' '2bwm-git' 'mcwm' 'mcwm-git') # due to /usr/bin/hidden program
+makedepends=('git' 'xcb-util')
+provides=("${pkgname}")
+options=(!strip !emptydirs)
+install="${pkgname}.install"
+
+prepare() {
+	cp -af ../source/. ${srcdir}
+	cp -af ../source ${srcdir}
+	cp -af ../shared ${srcdir}
+}
+
+build() {
+  cd "$srcdir"
+  make PREFIX=/usr
+}
+
+package() {
+  cd "$srcdir"
+  make DESTDIR="$pkgdir" PREFIX=/usr MANPREFIX=/usr/share/man install
+  install -Dm644 "$srcdir/2bwm.desktop" "$pkgdir/usr/share/xsessions/2bwm.desktop"
+
+  ## Install shared files
+  local _2bwmdir=${pkgdir}/usr/share/archcraft
+  mkdir -p "$_2bwmdir"
+
+  cp -r ${srcdir}/shared 		"$_2bwmdir"/2bwm
+  chmod +x "$_2bwmdir"/2bwm/scripts/*
+  chmod +x "$_2bwmdir"/2bwm/theme/polybar/scripts/bluetooth.sh
+
+  ## Copy Source files in /opt
+  local _2bwmsrc=${pkgdir}/opt/2bwm-source
+  mkdir -p "$_2bwmsrc"
+
+  cp -r ${srcdir}/source/* 		"$_2bwmsrc"
+}
