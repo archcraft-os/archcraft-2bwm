@@ -1,8 +1,8 @@
 # Maintainer: Aditya Shakya <adi1090x@gmail.com>
 
 pkgname=archcraft-2bwm
-pkgver=1.0
-pkgrel=1
+pkgver=2.0
+pkgrel=0
 pkgdesc="2BWM for Archcraft"
 arch=('any')
 url="https://github.com/archcraft-os/archcraft-2bwm"

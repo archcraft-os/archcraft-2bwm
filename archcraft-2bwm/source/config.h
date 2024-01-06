@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-/* Copyright (C) 2020-2023 Aditya Shakya <adi1090x@gmail.com>
+/* Copyright (C) 2020-2024 Aditya Shakya <adi1090x@gmail.com>
  * 
  * 2BWM Configuration for Archcraft
  * 
