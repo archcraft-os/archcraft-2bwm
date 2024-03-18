@@ -7,6 +7,9 @@
 # 2bwm dir
 bwmdir="/usr/share/archcraft/2bwm"
 
+# Export desktop session
+export XDG_CURRENT_DESKTOP='2bwm'
+
 # Kill already running process
 _ps=(xsettingsd ksuperkey)
 for _prs in "${_ps[@]}"; do
