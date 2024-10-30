@@ -91,6 +91,7 @@ static void toggle_sloppy(const Arg *arg)
 static const char *termcmd[]  			= { "/usr/share/archcraft/2bwm/scripts/2bwm_term", NULL };
 static const char *floatterm[]  		= { "/usr/share/archcraft/2bwm/scripts/2bwm_term", "--float", NULL };
 static const char *fullterm[]  			= { "/usr/share/archcraft/2bwm/scripts/2bwm_term", "--full", NULL };
+static const char *kittycmd[]  			= { "/usr/share/archcraft/2bwm/scripts/2bwm_kitty", NULL };
 static const char *fmcmd[]    			= { "/usr/share/archcraft/2bwm/scripts/2bwm_apps", "--file", NULL };
 static const char *editcmd[]  			= { "/usr/share/archcraft/2bwm/scripts/2bwm_apps", "--editor", NULL };
 static const char *webcmd[]  			= { "/usr/share/archcraft/2bwm/scripts/2bwm_apps", "--web", NULL };
@@ -173,9 +174,12 @@ static key keys[] = {
 	{ CONTROL, 					XK_Print, 					start, {.com = shotwin } },
 	{ MODKEY, 					XK_Print, 					start, {.com = shotarea } },
 
-	// Terminals -----------
+	// Terminal : alacritty -----------
     { MODKEY, 					XK_Return, 					start, {.com = termcmd } },
     { MODKEY|SHIFT, 			XK_Return, 					start, {.com = fullterm } },
+
+	// Terminal : kitty -----------
+    { ALTKEY|CONTROL, 			XK_t, 						start, {.com = kittycmd } },
 
 	// Launch Apps -----------
     { MODKEY, 					XK_f, 						start, {.com = fmcmd } },
